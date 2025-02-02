@@ -5,20 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
-import com.kzerk.cryptoapp.data.database.AppDatabase
+import com.kzerk.cryptoapp.data.database.CoinInfoDao
 import com.kzerk.cryptoapp.data.mapper.CoinMapper
 import com.kzerk.cryptoapp.data.workers.RefreshDataWorker
 import com.kzerk.cryptoapp.domain.CoinInfo
 import com.kzerk.cryptoapp.domain.CoinRepository
+import javax.inject.Inject
 
-class CoinRepositoryImpl(
-	private val application: Application
+class CoinRepositoryImpl @Inject constructor(
+	private val application: Application,
+	private val coinInfoDao: CoinInfoDao,
+	private val mapper: CoinMapper
 ) : CoinRepository {
-
-	private val coinInfoDao = AppDatabase.getInstance(application).coinPriceInfoDao()
-
-	private val mapper = CoinMapper()
-
 	override fun getCoinInfoList(): LiveData<List<CoinInfo>> {
 		return coinInfoDao.getPriceList().map {
 			it.map {

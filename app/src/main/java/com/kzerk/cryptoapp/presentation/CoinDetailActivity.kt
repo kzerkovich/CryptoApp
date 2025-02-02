@@ -6,10 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kzerk.cryptoapp.R
 import com.kzerk.cryptoapp.databinding.ActivityCoinDetailBinding
-import com.kzerk.cryptoapp.presentation.adapters.CoinDetailFragment
 
 class CoinDetailActivity : AppCompatActivity() {
-
 	private val binding by lazy {
 		ActivityCoinDetailBinding.inflate(layoutInflater)
 	}
