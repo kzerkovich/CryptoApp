@@ -73,4 +73,7 @@ dependencies {
 	implementation (libs.kotlinx.coroutines.core)
 	implementation (libs.kotlinx.coroutines.android)
 	implementation (libs.lifecycle.viewmodel.ktx)
+
+	implementation(libs.android.dagger)
+	kapt(libs.android.dagger.compiler)
 }

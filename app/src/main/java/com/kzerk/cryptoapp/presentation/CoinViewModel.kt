@@ -1,21 +1,17 @@
 package com.kzerk.cryptoapp.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import com.kzerk.cryptoapp.data.repository.CoinRepositoryImpl
+import androidx.lifecycle.ViewModel
 import com.kzerk.cryptoapp.domain.GetCoinInfoListUseCase
 import com.kzerk.cryptoapp.domain.GetCoinInfoUseCase
 import com.kzerk.cryptoapp.domain.LoadDataUseCase
+import javax.inject.Inject
 
-class CoinViewModel(application: Application) : AndroidViewModel(application) {
+class CoinViewModel @Inject constructor(
+	private val getCoinInfoListUseCase: GetCoinInfoListUseCase,
+	private val getCoinInfoUseCase: GetCoinInfoUseCase,
+	private val loadDataUseCase: LoadDataUseCase
 
-	private val repository = CoinRepositoryImpl(application)
-
-	private val getCoinInfoListUseCase = GetCoinInfoListUseCase(repository)
-	private val getCoinInfoUseCase = GetCoinInfoUseCase(repository)
-	private val loadDataUseCase = LoadDataUseCase(repository)
-
-
+) : ViewModel() {
 	val coinInfoList = getCoinInfoListUseCase()
 
 	fun getDetailInfo(fSym: String) = getCoinInfoUseCase(fSym)
